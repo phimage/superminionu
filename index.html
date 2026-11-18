@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Minions Super U — Ma collection</title>
+  <meta name="description" content="Suivi de la collection d'autocollants Minions « Incognitos » des Magasins U : possédées, manquantes, doubles, et lien de partage.">
+  <meta name="theme-color" content="#ffd400">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='4' width='44' height='56' rx='22' fill='%23ffd400'/%3E%3Crect x='6' y='22' width='52' height='8' fill='%23333'/%3E%3Ccircle cx='32' cy='26' r='11' fill='%23bbb'/%3E%3Ccircle cx='32' cy='26' r='8' fill='%23fff'/%3E%3Ccircle cx='32' cy='26' r='4' fill='%235a3b1c'/%3E%3Cpath d='M10 44h44v4a22 12 0 0 1-44 0z' fill='%232f6db5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="brand">
+        <h1>Minions <span>Incognitos</span></h1>
+        <p class="sub">Autocollants Magasins U 2026</p>
+      </div>
+      <div class="actions">
+        <button id="btn-share" class="btn primary" type="button">Partager</button>
+        <button id="btn-menu" class="btn icon" type="button" aria-label="Plus d'actions" aria-expanded="false">⋯</button>
+        <div id="menu" class="menu" hidden>
+          <button type="button" data-act="copy-doubles">Copier la liste des doubles</button>
+          <button type="button" data-act="copy-missing">Copier la liste des manquantes</button>
+          <button type="button" data-act="rename">Nommer ma collection</button>
+          <button type="button" data-act="reset" class="danger">Tout effacer</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="shared-banner" class="banner" hidden>
+    <div class="wrap banner-inner">
+      <p><strong>Collection partagée</strong><span id="shared-name"></span> — lecture seule.</p>
+      <div class="banner-actions">
+        <button id="btn-mine" class="btn" type="button">Voir ma collection</button>
+        <button id="btn-import" class="btn ghost" type="button">Remplacer la mienne par celle-ci</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="stats" aria-live="polite">
+      <div class="progress"><div id="bar" class="bar"></div></div>
+      <div class="nums">
+        <span><b id="s-owned">0</b>/<span id="s-total">80</span> possédées</span>
+        <span><b id="s-missing">0</b> manquantes</span>
+        <span><b id="s-doubles">0</b> doubles</span>
+      </div>
+    </section>
+
+    <nav class="filters" aria-label="Filtres">
+      <div class="chips" role="radiogroup" id="filters">
+        <button class="chip" role="radio" data-f="all" aria-checked="true">Toutes</button>
+        <button class="chip" role="radio" data-f="missing" aria-checked="false">Manquantes</button>
+        <button class="chip" role="radio" data-f="owned" aria-checked="false">Possédées</button>
+        <button class="chip" role="radio" data-f="doubles" aria-checked="false">Doubles</button>
+        <button class="chip trade" role="radio" data-f="they-give" aria-checked="false" hidden>Ses doubles qui me manquent</button>
+        <button class="chip trade" role="radio" data-f="i-give" aria-checked="false" hidden>Mes doubles qui lui manquent</button>
+      </div>
+      <input id="search" class="search" type="search" inputmode="search" placeholder="N° (ex. 12, P3)" aria-label="Chercher un numéro">
+    </nav>
+
+    <p class="hint" id="hint">Touchez une vignette pour l'ajouter (+1). Le bouton − en retire une.</p>
+
+    <ul id="grid" class="grid"></ul>
+    <p id="empty" class="empty" hidden>Aucune vignette pour ce filtre.</p>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Votre collection est enregistrée dans ce navigateur, et l'URL la contient aussi : partagez-la pour montrer votre collection.
+      Finitions (pailletée ✨, dorée ★) et coin peluche 🧸 d'après paninimania.com ; elles n'ont pas été confirmées par Magasins U.
+      Site de fan, sans lien avec Magasins U, Illumination ou Universal.</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="data/stickers.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
